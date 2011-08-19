@@ -24,7 +24,7 @@
  * @author mickael
  */
 
-namespace application\modules\moduleName\controllers;
+namespace application\modules\proposal\controllers;
 
 class getProposals extends \framework\core\Controller
 {
@@ -34,7 +34,7 @@ class getProposals extends \framework\core\Controller
         if($userRequestId !== null)
         {
             $proposals = $this->getComponent('entityManager')
-                ->getRepository('\application\modules\proposal\model\Proposal')->findByUserRequest($userRequestId);
+                ->getRepository('\application\modules\proposal\models\Proposal')->findByUserRequest($userRequestId);
         
             $this->set('proposals', $proposals);   
         }

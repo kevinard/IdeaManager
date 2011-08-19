@@ -112,7 +112,7 @@ class UserRequest extends \framework\core\FrameworkObject
     /**
      * @return DateTime
      */
-    public function getEndDate()
+    public function getDate()
     {
         return $this->date;
     }
