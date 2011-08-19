@@ -4,7 +4,7 @@ namespace application\modules\userrequest\controllers;
 class Update extends \application\modules\user\securedZoneController
 {
 	public function processAction($userRequestId = null)
-	{
+	{\var_dump($_SESSION['connectedUser']->getId());
         $em = $this->getComponent('entityManager');
 		
         if ($userRequestId === null)
@@ -36,7 +36,7 @@ class Update extends \application\modules\user\securedZoneController
             $this->set('errors', $errors);
             return;
         }
-
+		
         $userrequest->setTitle($_POST['requestTitle']);
         $userrequest->setContent($_POST['requestContent']);
         $userrequest->setAuthor($em->getRepository('\application\modules\user\models\User')->find($_SESSION['connectedUser']->getId()));

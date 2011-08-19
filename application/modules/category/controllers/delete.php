@@ -9,13 +9,15 @@ class Delete extends \framework\core\Controller
 
 	public function processAction ($categoryId)
 	{
-		$url = $this->getConfig("siteUrl") . "category/listing";
+		$url = $this->getConfig("siteUrl");
 		$em = $this->getComponent("entityManager");
-		$category = $em->getRepository('application\modules\category\models\Category')->find($categoryId);
+		$category = $em->getRepository('application\modules\category\models\Category')->findOneById($categoryId);
+		
 		if ($category)
 		{
 			$em->remove($category);
 		}
+		
 		$this->getComponent("httpResponse")->redirect($url, 302, false);
 	}
 

@@ -11,14 +11,16 @@ class Delete extends \application\modules\user\securedZoneController
 	{
 		
 		$em = $this->getComponent("entityManager");
-		$userrequest = $em->getRepository('application\modules\category\models\UserRequest')->find($userrequest_id);
-
-                $url = $this->getConfig("siteUrl") . "category/listing" . $userrequest->category;
-                
+		$userrequest = $em->getRepository('application\modules\userrequest\models\UserRequest')->find($userrequest_id);
+		
+        $url = $this->getConfig("siteUrl") . "category/listing/" . $userrequest->getCategory()->getId();
+        
 		if ($userrequest)
 		{
 			$em->remove($userrequest);
+			$em->flush();
 		}
+		
 		$this->getComponent("httpResponse")->redirect($url, 302, false);
 	}
 

@@ -23,7 +23,7 @@ class UserRequest extends \framework\core\FrameworkObject
     protected $content;
     
     /**
-     * @ManyToOne(targetEntity="\application\modules\user\models\User", cascade={"remove"})
+     * @ManyToOne(targetEntity="\application\modules\user\models\User")
      */
     protected $author;
     
@@ -34,7 +34,7 @@ class UserRequest extends \framework\core\FrameworkObject
     protected $date;
     
     /**
-     * @ManyToOne(targetEntity="\application\modules\category\models\Category", cascade={"remove"})
+     * @ManyToOne(targetEntity="\application\modules\category\models\Category")
      */
     protected $category;
     
