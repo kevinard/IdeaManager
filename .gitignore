@@ -1,0 +1,11 @@
+*~
+application/build/*
+*/*.orig
+doc/*
+.project
+.project/*
+.buildpath
+.settings/*
+.DS_STORE
+nbproject/
+nbproject/*
