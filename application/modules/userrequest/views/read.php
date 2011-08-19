@@ -6,11 +6,14 @@
  */
 
 
-/* @var $userrequest \application\modules\userrequest\models\UserRequest */
+/* @var $userrequest \application\modules\userrequest\models\UserRequest  */
+
+if(isset($userrequest) && isset($proposals)) :
 ?>
 
 <h2>
-    <?php echo $userrequest->getCategory()->getName();  ?> >
+    <?php 
+    echo $userrequest->getCategory()->getName();  ?> >
     <?php echo $userrequest->getTitle(); ?>
 </h2>
 <h4>
@@ -19,4 +22,5 @@
 </h4>
 <p><?php echo $userrequest->getContent(); ?></p>
 
-<?php echo $proposals; ?>
+<?php echo $proposals; 
+endif; ?>
