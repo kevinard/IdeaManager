@@ -10,7 +10,7 @@ class GetNumber extends \framework\core\Controller
 			$catId = '*';
 		}
 		
-		$userrequests = $this->getComponent('entityManager')->getRepository('application\modules\userrequest\models\UserRequest')->countByCategory($catId);
+		$userrequests = count($this->getComponent('entityManager')->getRepository('application\modules\userrequest\models\UserRequest')->findByCategory($catId));
 
         $this->getResponse()->set($userrequests);
     }
