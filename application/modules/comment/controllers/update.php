@@ -40,7 +40,7 @@ class update extends \application\modules\user\securedZoneController
         }
         else
         {
-            $comment = $em->getRepository('\application\modules\userRequest\models\UserRequest')->find($commentId);
+            $comment = $em->getRepository('\application\modules\userrequest\models\UserRequest')->find($commentId);
         }
         
         
@@ -48,13 +48,13 @@ class update extends \application\modules\user\securedZoneController
             && isset($_POST['userId']) && isset($_POST['userRequestId']))
         {
             $comment->setContent($_POST['commentContent']);
-            $comment->setUser($em->getRepository('\application\modules\userRequest\models\UserRequest')->findBy($_POST['userId']));
-            $comment->setUserRequest($em->getRepository('\application\modules\userRequest\models\UserRequest')->find($_POST['userRequestId']));
+            $comment->setUser($em->getRepository('\application\modules\user\models\User')->find($_SESSION['connectedUser']->getId()));
+            $comment->setUserRequest($em->getRepository('\application\modules\userrequest\models\UserRequest')->find($_POST['userRequestId']));
             
             $em->persist($comment);
 
             // $this->set('comment', $comment);
-            $url = $this->getConfig('siteUrl').'userRequest/read/'.$comment->getUserRequest()->getId();
+            $url = $this->getConfig('siteUrl').'userrequest/read/'.$comment->getUserRequest()->getId();
             $this->getComponent('httpResponse')->redirect($url , 302, false);
         }
         

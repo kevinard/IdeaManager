@@ -173,7 +173,7 @@ class Comment extends \framework\core\FrameworkObject
      * @param \application\modules\userRequest\models\UserRequest $userRequest the new UserRequest
      * @return \application\modules\comment\models\Comment the current comment
      */
-    public function setUserRequest(\application\modules\userRequest\models\UserRequest $userRequest)
+    public function setUserRequest(\application\modules\userrequest\models\UserRequest $userRequest)
     {
         $this->userRequest = $userRequest;
         return $this;

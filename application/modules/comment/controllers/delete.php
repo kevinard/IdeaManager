@@ -29,7 +29,7 @@ namespace application\modules\comment\controllers;
 class delete extends \application\modules\user\securedZoneController
 {
 
-    //public $usesView = false;
+    protected $usesView = false;
     
     public function processAction($commentId = null)
     {
@@ -48,7 +48,7 @@ class delete extends \application\modules\user\securedZoneController
                 $this->setMessage('No comment was found');
             }
             
-            $url = $this->getConfig('siteUrl').'userRequest/read/'.$comment->getUserRequest()->getId();
+            $url = $this->getConfig('siteUrl').'userrequest/read/'.$comment->getUserRequest()->getId();
             $this->getComponent('httpResponse')->redirect($url, 302, false);
         }
     }
