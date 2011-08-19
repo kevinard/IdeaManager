@@ -48,7 +48,7 @@ class delete extends \application\modules\user\securedZoneController
                 $this->setMessage('No proposal was found');
             }
             
-            $url = $this->getConfig('siteUrl').'userRequest/read'.$proposal->getUserRequest()->getId();
+            $url = $this->getConfig('siteUrl').'userrequest/read/'.$proposal->getUserRequest()->getId();
             $this->getComponent('httpResponse')->redirect($url, 302, false);
         }
     }

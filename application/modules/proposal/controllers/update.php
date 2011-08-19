@@ -29,9 +29,13 @@ namespace application\modules\proposal\controllers;
 class update extends \application\modules\user\securedZoneController
 {
 
-    public function processAction($proposalId = null)
+    /**
+     * TODO : FINIR les cas ou on ajoute sans faire un update
+     */
+    public function processAction($proposalId = null, $userRequestId = null)
     {
         $em = $this->getComponent('entityManager');
+        $url = $this->getConfig()->get('siteUrl').'userRequest/';
         
         if($proposalId === null)
         {
@@ -50,8 +54,7 @@ class update extends \application\modules\user\securedZoneController
             $em->presist($proposal);
             
             // $this->set('proposal', $proposal);
-            
-            $url = $this->getConfig('siteUrl').'userRequest/';
+
             $this->getComponent('httpResponse')->redirect($url.'read/'.$proposal->getUserrequest()->getId(), 302, false);
         }
         else

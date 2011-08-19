@@ -33,10 +33,14 @@ class getProposals extends \framework\core\Controller
     {
         if($userRequestId !== null)
         {
-            $proposals = $this->getComponent('entityManager')
-                ->getRepository('\application\modules\proposal\models\Proposal')->findByUserRequest($userRequestId);
-        
-            $this->set('proposals', $proposals);   
+            $em = $this->getComponent('entityManager');
+            
+            $proposals = $em->getRepository('\application\modules\proposal\models\Proposal')->findByUserRequest($userRequestId);
+            $userRequest = $em->getRepository('\application\modules\userrequest\models\UserRequest')->find($userRequestId);
+            
+            $this->set('viewerIsOwner', ($userRequest->getAuthor()->getId() === $_SESSION['connectedUser']->getId()));
+            $this->set('proposals', $proposals);  
+            $this->set('userRequestId', $userRequestId);
         }
     }
 

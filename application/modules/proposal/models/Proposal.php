@@ -30,8 +30,8 @@ class Proposal extends \framework\core\FrameworkObject
     protected $content = '';
     
     /**
-     * @var \application\modules\userRequest\models\UserRequest The UserRequest the proposal is related to
-	 * @ManyToOne(targetEntity="\application\modules\userRequest\models\UserRequest", inversedBy="proposals")
+     * @var \application\modules\userrequest\models\UserRequest The UserRequest the proposal is related to
+	 * @ManyToOne(targetEntity="\application\modules\userrequest\models\UserRequest", inversedBy="proposals", cascade={"remove"})
 	 */
     protected $userRequest = null;
     
@@ -39,11 +39,17 @@ class Proposal extends \framework\core\FrameworkObject
     
     
     /**
-     * Default constructor
+     * Constructor
+     * @param string $content The proposal's content
+     * @param \application\modules\userrequest\models\UserRequest $userRequest The proposal's UserRequest
      */
-    public function __construct()
+    public function __construct($content = null, \application\modules\userrequest\models\UserRequest $userRequest = null)
     {
-        // empty
+        if($content !== null)
+            $this->setContent($content);
+    
+        if($userRequest !== null)
+            $this->setUserRequest($userRequest);
     }
     
     /**
@@ -70,7 +76,7 @@ class Proposal extends \framework\core\FrameworkObject
 
     /**
      * Get the UserRequest the proposal is related to
-     * @return \application\modules\userRequest\models\UserRequest 
+     * @return \application\modules\userrequest\models\UserRequest 
      */
     public function getUserRequest()
     {
@@ -87,7 +93,7 @@ class Proposal extends \framework\core\FrameworkObject
      * @param string $content The new content
      * @return \application\modules\proposal\models\Proposal 
      */
-    public function setContent(string $content)
+    public function setContent($content)
     {
         $this->content = strip_tags($content, '<a><p><span><ul><ol><li><em><i><strong><u><b><strike><div><blockquote>');
         return $this;
@@ -98,7 +104,7 @@ class Proposal extends \framework\core\FrameworkObject
      * @param int $userRequest
      * @return \application\modules\proposal\models\Proposal 
      */
-    public function setUserRequest(int $userRequest)
+    public function setUserRequest(\application\modules\userrequest\models\UserRequest $userRequest)
     {
         $this->userRequest = $userRequest;
         return $this;

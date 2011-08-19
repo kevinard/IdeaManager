@@ -29,9 +29,12 @@ namespace application\modules\proposal\controllers;
 class create extends \application\modules\user\securedZoneController
 {
 
-    public function processAction($content = null, $userRequestId = null)
+    public function processAction($userRequestId = null)
     {
-        $this->setResponse($this->createRequest('proposal', 'update')->execute());
+        if($userRequestId !== null)
+        {
+            $this->setResponse($this->createRequest('proposal', 'update', array(null, $userRequestId))->execute());
+        }
     }
 
 }

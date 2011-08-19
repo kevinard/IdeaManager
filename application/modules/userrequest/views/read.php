@@ -22,5 +22,5 @@ if(isset($userrequest) && isset($proposals)) :
 </h4>
 <p><?php echo $userrequest->getContent(); ?></p>
 
-<?php echo $proposals; 
+<?php echo $proposals;
 endif; ?>
