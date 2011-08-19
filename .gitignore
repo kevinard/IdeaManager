@@ -9,3 +9,4 @@ doc/*
 .DS_STORE
 nbproject/
 nbproject/*
+config/conf.php
