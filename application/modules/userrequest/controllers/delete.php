@@ -18,7 +18,6 @@ class Delete extends \application\modules\user\securedZoneController
 		if ($userrequest)
 		{
 			$em->remove($userrequest);
-			$em->flush();
 		}
 		
 		$this->getComponent("httpResponse")->redirect($url, 302, false);
