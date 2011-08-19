@@ -8,9 +8,11 @@
     <p>
         <label for="requestCategory">Category: </label>
         <select name="requestCategory" id="requestCategory">
-            <?php foreach($categories as $category): ?>
+            <?php foreach($categories as $category): 
+				if ($category->getParentId() !== null): ?>
             <option value="<?php echo $category->getId(); ?>"><?php echo $category->getName(); ?></option>
-            <?php endforeach; ?>
+            <?php endif; 
+			endforeach; ?>
         </select>
     </p>
     
