@@ -9,5 +9,7 @@ foreach($categories as $category) : ?>
 <?php endforeach; ?>
 </ol>
 
+<?php echo $userrequests; ?>
+
 <a href="<?php echo $url.'/userrequest/create/'; ?>">Create a new request</a> <br />
 <a href="<?php echo $url.'/category/create/'; ?>">Create a new category</a>
