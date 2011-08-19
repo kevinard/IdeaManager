@@ -5,16 +5,18 @@ class Listing extends \framework\core\Controller
 {
     public function processAction($catId = null, $state = null)
     {
-        if ($catId === null)
+        $criteria = array();
+		
+		if ($catId !== null)
 		{
-			$catId = '*';
+			$criteria['category'] = $catId;
 		}
-		if ($state === null)
+		if ($state !== null)
 		{
-			$state = '*';
+			$criteria['state'] = $state;
 		}
 		
-		$userrequests = $this->getComponent('entityManager')->getRepository('application\modules\userrequest\models\UserRequest')->findBy(array('category' => $catId, 'state' => $state));
+		$userrequests = $this->getComponent('entityManager')->getRepository('application\modules\userrequest\models\UserRequest')->findBy($criteria);
 
         $this->set('userrequests', $userrequests);
     }

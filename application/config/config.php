@@ -2,7 +2,7 @@
 
 
 $config = array(
-    'siteUrl' => 'http://10.3.18.24/projects/IdeaManager/',
+    'siteUrl' => 'http://10.3.16.20/ideamanager2/',
     'routes' => array('n/<name>' => array('module' => 'website', 'action' => 'hello', 'params' => array())),
 	'defaultModule' => 'category',
 	'defaultAction' => 'listing',
@@ -13,9 +13,9 @@ $config = array(
 	'applicationFilters' => array('framework\filters\appFilters\ConnectionFilter'),
 	'dbConnectionParams' => array(
 		'driver' => 'pdo_mysql',
-		'user' => 'ideamanager',
-		'password' => 'ideamanager',
-		'dbname' => 'ideamanager',
+		'user' => 'root',
+		'password' => 'root',
+		'dbname' => 'cours_42framework',
 		'host' => 'localhost'
 		)
     );
