@@ -29,6 +29,7 @@ namespace application\modules\commentvote\models;
 
 /**
  * @Entity
+ * @Table(name="commentvotes")
  */
 class CommentVote extends \application\modules\vote\models\Vote
 {

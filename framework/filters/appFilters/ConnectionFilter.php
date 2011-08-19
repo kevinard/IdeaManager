@@ -40,9 +40,5 @@ class ConnectionFilter extends \framework\filters\Filter
 				}
 			}
 		}
-		else
-		{
-			$this->getComponent('entityManager')->persist($_SESSION['connectedUser']);
-		}
 	}
 }

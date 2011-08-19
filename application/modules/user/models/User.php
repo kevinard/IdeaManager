@@ -2,7 +2,8 @@
 namespace application\modules\user\models;
 
 /**
- * @Entity @Table(name="users")
+ * @Entity 
+ * @Table(name="users", uniqueConstraints={@UniqueConstraint(name="login_unique_constraint", columns={"login"})})
  */
 class User extends \framework\core\FrameworkObject
 {

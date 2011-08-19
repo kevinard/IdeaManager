@@ -5,30 +5,35 @@ namespace application\modules\userrequest\models;
 /**
  * @Entity @Table(name="userrequests")
  */
-class UserRequest
+class UserRequest extends \framework\core\FrameworkObject
 {
     /**
      * @Id @Column(type="integer") @GeneratedValue
      */
     protected $id;
+    
     /**
      * @Column(type="string")
      */
     protected $title;
+    
     /**
      * @Column(type="text")
      */
     protected $content;
+    
     /**
-     * @OneToMany(targetEntity="\application\modules\user\models\User", inversedBy="userrequests", cascade={"persist"})
+     * @ManyToOne(targetEntity="\application\modules\user\models\User", cascade={"remove"})
      */
     protected $author;
+    
     /**
      * @Column(type="datetime")
 	 * @var DateTime
      */
     protected $date;
-     /**
+    
+    /**
      * @ManyToOne(targetEntity="\application\modules\category\models\Category", cascade={"remove"})
      */
     protected $category;

@@ -29,6 +29,7 @@ namespace application\modules\proposalvote\models;
 
 /**
  * @Entity
+ * @Table(name="proposalvotes")
  */
 class ProposalVote extends \application\modules\vote\models\Vote
 {

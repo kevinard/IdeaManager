@@ -39,7 +39,8 @@ class Update extends \application\modules\user\securedZoneController
 
         $userrequest->setTitle($_POST['requestTitle']);
         $userrequest->setContent($_POST['requestContent']);
-        $userrequest->setAuthor($_SESSION['connectedUser']);
+        $userrequest->setAuthor($em->getRepository('\application\modules\user\models\User')->find($_SESSION['connectedUser']->getId()));
+        // $userrequest->setAuthor($_SESSION['connectedUser']);
         $userrequest->setCategory($em->getRepository('\application\modules\category\models\Category')->find($_POST['requestCategory']));
 
 
