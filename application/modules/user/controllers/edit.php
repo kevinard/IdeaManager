@@ -1,7 +1,7 @@
 <?php
 namespace application\modules\user\controllers;
 
-class Edit extends \application\modules\user\securedAdminZoneController
+class Edit extends \application\modules\user\securedZoneController
 {
 	public function processAction($userId = null)
 	{
@@ -21,26 +21,45 @@ class Edit extends \application\modules\user\securedAdminZoneController
 		}
 		$this->set('user', $user);
 
-		if (isset($_POST['login']) && $_POST['login'] != '' &&
+                //Admin verification (Login & level user)
+                if($_SESSION['connectedUser']->isAdmin())
+                {
+                    if (isset($_POST['login']) && $_POST['login'] != '' &&
 				isset($_POST['level']) && $_POST['level'] != '')
-		{
-			$user->setLogin($_POST['login']);
-			$user->setLevel($_POST['level']);
+                    {
+                            $user->setLogin($_POST['login']);
+                            $user->setLevel($_POST['level']);
+                    }
+                    else
+                    {
+                        return;
+                    }
+                }
 
-			if (isset($_POST['password']) && isset($_POST['confirm']) &&
-					$_POST['password'] != "" && $_POST['password'] == $_POST['confirm'])
-			{
-				$user->setPassword($_POST['password']);
-			}
-			elseif ($userId == null)
-			{
-				return;
-			}
+                //$Password verifications
+                if (isset($_POST['password']) && isset($_POST['confirm']) &&
+                                $_POST['password'] != "" && $_POST['password'] == $_POST['confirm'])
+                {
+                        $user->setPassword($_POST['password']);
+                }
+                elseif ($userId == null)
+                {
+                     //   return;
+                }
 
-			$this->getComponent('entityManager')->persist($user);
+                //Language verifications
+                if (isset($_POST['lang']) && $_POST['lang'] != "")
+                {
+                    $user->setLang($_POST['lang']);
+                
+                    $this->getComponent('entityManager')->persist($user);
 
-			$this->usesView = false;
-			$this->getComponent("httpResponse")->redirect($url, 302, false);
-		}
+                    $this->usesView = false;
+                    $this->getComponent("httpResponse")->redirect($url, 302, false);
+                }
+                else 
+                {
+                       return;
+                }
 	}
 }

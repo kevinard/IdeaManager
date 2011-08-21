@@ -171,6 +171,16 @@ class ComponentsContainer extends \framework\libs\BaseContainer
 			return new \framework\libs\Session($namespace);
 		};
 		
+		$this->langManager = $this->asUniqueInstance(
+			function ($c, $args)
+			{
+				/* @var $c ApplicationContainer */
+				return new \framework\libs\LangManager();
+			}
+		);
+                
+                
+                
 		
 		/*
 		 * Doctrine

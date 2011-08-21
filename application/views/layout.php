@@ -20,7 +20,7 @@ else
 {
 ?>
 			Welcome <?php echo $_SESSION['connectedUser']->getLogin(); ?>. 
-			<a href="<?php echo $this->getConfig('siteUrl'); ?>user/changePassword/<?php echo $_SESSION['connectedUser']->getId(); ?>">Change password</a> / 
+			<a href="<?php echo $this->getConfig('siteUrl'); ?>user/edit/<?php echo $_SESSION['connectedUser']->getId(); ?>">Edit my profile</a> / 
 			<a href="<?php echo $this->getConfig('siteUrl'); ?>user/logout">Logout</a> 
 			<?php if ($_SESSION['connectedUser']->isAdmin()): ?>
 				 / <a href="<?php echo $this->getConfig('siteUrl'); ?>user">Admin</a>
@@ -32,6 +32,7 @@ else
 		
 		<div id="content">
 			<?php echo $contentForLayout; ?>
+                    
 		</div>
 	</body>
 </html>

@@ -17,28 +17,37 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA
  */
 
-$config = array(
-	'environment' => 'development',
-        'errorReporting' => E_ALL|E_STRICT,
-	'displayErrors' => 1,
-	'defaultModule' => 'website',
-        'defaultAction' => 'index',
-	'defaultLayout' => false,
-	'defaultCharset' => 'utf-8',
-	'defaultLanguage' => 'fr_FR',
-	'defaultTimezone' => 'Europe/Paris',
-	'viewExtension' => '.php',
-	'siteUrl' => 'http://localhost/',
-	'routes' => array(),
-	'historySize' => 2,
-	'errorHandlerListeners' => array('framework\\errorHandler\\listeners\\Html'),
-	'viewExtension' => '.php',
-        'langExtension' => '.php',
-	'applicationFilters' => array(),
-	'viewFilters' => array(),
-	'events' => array(),
-	'dbConnectionParams' => array(
-		'driver' => 'pdo_sqlite',
-		'path' => APPLICATION_DIR.DS.'database'.DS.'db.sqlite'
-	)
-);
+namespace framework\libs;
+
+class LangManager
+{	
+    //Traductions Data
+    public $lang_data = array();
+  
+    public function __construct()
+    {
+        $lang_data = array();
+    }
+
+    public function init($lang_file_path)
+    {
+        if(file_exists($lang_file_path))
+        {
+            include($lang_file_path);          
+        }      
+        
+        $this->lang_data = array_merge($this->lang_data,$lang);
+    }
+    
+    public function get($key)
+    {
+        if(array_key_exists($key, $this->lang_data))
+        {
+            return $this->lang_data[$key];
+        }
+        else
+        {
+            return "*".$key."*";
+        }
+    }
+}

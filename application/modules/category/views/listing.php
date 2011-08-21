@@ -11,5 +11,6 @@ foreach($categories as $category) : ?>
 
 <?php echo $userrequests; ?>
 
-<a href="<?php echo $url.'/userrequest/create/'; ?>">Create a new request</a> <br />
-<a href="<?php echo $url.'/category/create/'; ?>">Create a new category</a>
+<a href="<?php echo $url.'/userrequest/create/'; ?>"><?php echo $this->__('CREATE_REQUEST'); ?></a> <br />
+<a href="<?php echo $url.'/category/create/'; ?>"><?php echo $this->__('CREATE_CATEGORY'); ?></a>
+

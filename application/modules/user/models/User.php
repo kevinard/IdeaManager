@@ -28,9 +28,15 @@ class User extends \framework\core\FrameworkObject
     const ADMIN = 1;
     const USER = 0;
 
+     /**
+     * @Column(type="string")
+     */
+    protected $lang;
+    
     public function __construct()
     {
     }
+
 
     /************************/
     /*	Getter/Setter ID	*/
@@ -102,6 +108,19 @@ class User extends \framework\core\FrameworkObject
     {
         return $this->login;    
     }
-
+    
+    /************************/
+    /*	Getter/Setter LANG  */
+    /************************/	
+	
+    public function getLang()
+    {
+        return $this->lang;
+    }
+	
+    public function setLang($lang)
+    {
+        $this->lang = $lang;
+    }
 }
 
