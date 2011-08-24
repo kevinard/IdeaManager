@@ -7,11 +7,13 @@ class Read extends \framework\core\Controller
     {
         if($userRequestId !== null)
         {
-            $userrequest = $this->getComponent('entityManager')->getRepository('application\modules\userrequest\models\UserRequest')->find($userRequestId);
+            $userRequest = $this->getComponent('entityManager')->getRepository('application\modules\userrequest\models\UserRequest')->find($userRequestId);
             $proposals = $this->createRequest('proposal', 'getProposals', array($userRequestId))->execute()->get();
-
-            $this->set('userrequest', $userrequest);
+            $comments = $this->createRequest('comment', 'getComments', array($userRequestId))->execute()->get();
+            
+            $this->set('userRequest', $userRequest);
             $this->set('proposals', $proposals);
+            $this->set('comments', $comments);
         }
     }
 }

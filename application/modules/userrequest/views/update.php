@@ -37,7 +37,9 @@
     <?php endif; ?> 
     
     <p>Content: </p>
-    <textarea name="userRequestContent" id="userRequestContent" cols="30" rows="10"></textarea>
+    <textarea name="userRequestContent" id="userRequestContent" cols="30" rows="10">
+    <?php ?>
+    </textarea>
     
     
     <p>Proposals: </p>
@@ -50,7 +52,7 @@
     </p>
 
     <p>
-        <input type="submit" value="<?php echo ($newRequest) ? 'Create' : 'Update'?>" />
+        <input type="submit" name="formSubmit" value="<?php echo ($newRequest) ? 'Create' : 'Update'?>" />
     </p>
 </form>
 

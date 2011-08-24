@@ -140,9 +140,10 @@ class Comment extends \framework\core\FrameworkObject
      * @param string $content the new content
      * @return \application\modules\comment\models\Comment the current comment
      */
-    public function setContent(string $content)
+    public function setContent($content)
     {
         $this->content = strip_tags($content, '<a><p><span><ul><ol><li><em><i><strong><u><b><strike><div><blockquote>');
+        //$this->content = $content;
         return $this;
     }
 
@@ -151,7 +152,7 @@ class Comment extends \framework\core\FrameworkObject
      * @param int $score  the new score
      * @return \application\modules\comment\models\Comment the current comment
      */
-    public function setScore(int $score)
+    public function setScore($score)
     {
         $this->score = $score;
         return $this;

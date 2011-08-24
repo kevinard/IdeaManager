@@ -29,8 +29,30 @@ namespace application\modules\comment\controllers;
 class create extends \application\modules\user\securedZoneController
 {
 
-    public function processAction()
+    public function processAction($userRequestId)
     {
-        $this->setResponse($this->createRequest('comment', 'update')->execute());
+        if($userRequestId !== null && isset($_POST['formSubmit']))
+        {
+            
+            $url = $this->getConfig('siteUrl');
+            
+            $em = $this->getComponent('entityManager');
+            
+            $comment = new \application\modules\comment\models\Comment();
+            $comment->setContent($_POST['commentContent']);
+            $comment->setUser($em->getRepository('\application\modules\user\models\User')->find($_SESSION['connectedUser']->getId()));
+            $comment->setUserRequest($em->getRepository('\application\modules\userrequest\models\UserRequest')->find($userRequestId));
+            
+            $em->persist($comment);
+            
+            $em->flush();
+            
+            $this->getComponent('httpResponse')->redirect($url.'userrequest/read/'.$userRequestId, 302, false);
+        }
+        else
+        {
+            
+        }
+        
     }
 }

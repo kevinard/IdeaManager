@@ -9,7 +9,7 @@
 ?>
 
 
-PROPOSALS: 
+<h4>PROPOSALS: </h4>
 <?php
 
 $baseUrl = $this->getConfig()->get('siteUrl');
@@ -21,10 +21,13 @@ if(\count($proposals)) : ?>
     <li>
         <a href="<?php echo $baseUrl.'proposal/read/'.$proposal->getId(); ?>"><?php echo $proposal->getContent(); ?></a>
         <div>
-            <?php if($viewerIsOwner) :?>
-            <a href="<?php echo $baseUrl.'proposal/delete/'.$proposal->getId(); ?>">Remove</a>
+            <?php if(isset($_SESSION['connectedUser'])): ?>
+                <?php if($viewerIsOwner) : ?>
+                <a href="<?php echo $baseUrl.'proposal/delete/'.$proposal->getId(); ?>">Remove</a>
+                <?php endif; ?>
+                <a href="<?php echo $baseUrl.'proposalvote/update/'.$proposal->getId().'/'.$_SESSION['connectedUser']->getId(); ?>">Up-vote!</a>
+        
             <?php endif; ?>
-            <a href="<?php echo $baseUrl.'proposalvote/update/'.$proposal->getId().'/'.$_SESSION['connectedUser']->getId(); ?>">Up-vote!</a>
         </div>
     </li>
     
@@ -36,5 +39,5 @@ if(\count($proposals)) : ?>
 <?php endif;
 
 if($viewerIsOwner) :?>
-    <a href="<?php echo $baseUrl.'proposal/create/'.$userRequestId; ?>">Add a new proposal</a>
+    <a href="<?php echo $baseUrl.'userrequest/update/'.$userRequestId; ?>">Add a new proposal</a>
 <?php endif; ?>

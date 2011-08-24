@@ -45,17 +45,18 @@ class View extends \framework\core\FrameworkObject
 			{
 				throw new \RuntimeException('View not found : '.$this->_file);
 			}
-                        
-                        if(isset($this->getConfig('currentLang')))
-                        {
-                            $lang_file_name = $this->getConfig('currentLang');
-                            if($lang_file_name != '' && $lang_file_name != null)
-                            {       
-                                $file_path = MODULES_DIR.DS.$module.DS.'lang'.DS.$lang_file_name.$config['langExtension'];
-                                $this->getComponent('langManager')->init($file_path);
-                            }
-                        }        
-                       
+                
+            
+            if(isset($config['currentLang']))
+            {
+                $lang_file_name = $this->getConfig('currentLang');
+                if($lang_file_name != '' && $lang_file_name != null)
+                {       
+                    $file_path = MODULES_DIR.DS.$module.DS.'lang'.DS.$lang_file_name.$config['langExtension'];
+                    $this->getComponent('langManager')->init($file_path);
+                }
+            }        
+
 		}
 		
 		if ($vars !== false)

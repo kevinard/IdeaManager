@@ -41,6 +41,7 @@ class delete extends \application\modules\user\securedZoneController
             if($proposal !== null)
             {
                 $em->remove($proposal);
+                $em->flush();
                 $this->setMessage('Delete action successful');
             }
             else

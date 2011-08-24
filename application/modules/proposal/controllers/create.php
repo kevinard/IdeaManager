@@ -33,7 +33,7 @@ class create extends \application\modules\user\securedZoneController
     {
         if($userRequestId !== null)
         {
-            $this->setResponse($this->createRequest('proposal', 'update', array(null, $userRequestId))->execute());
+            $this->setResponse($this->createRequest('proposal', 'update', array(null, $userRequestId))-execute());
         }
     }
 

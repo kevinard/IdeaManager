@@ -38,7 +38,15 @@ class getProposals extends \framework\core\Controller
             $proposals = $em->getRepository('\application\modules\proposal\models\Proposal')->findByUserRequest($userRequestId);
             $userRequest = $em->getRepository('\application\modules\userrequest\models\UserRequest')->find($userRequestId);
             
-            $this->set('viewerIsOwner', ($userRequest->getAuthor()->getId() === $_SESSION['connectedUser']->getId()));
+            if(isset($_SESSION['connectedUser']) && $userRequest->getAuthor()->getId() === $_SESSION['connectedUser']->getId())
+            {
+                $this->set('viewerIsOwner', true);
+            }
+            else
+            {
+                $this->set('viewerIsOwner', false);
+            }
+            
             $this->set('proposals', $proposals);  
             $this->set('userRequestId', $userRequestId);
         }
