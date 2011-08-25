@@ -7,15 +7,12 @@
 
 
 /* @var $userRequest \application\modules\userrequest\models\UserRequest  */
-/* @var proposals string */
+/* @var $proposals string */
+/* @var $comments string */
 /* @var $url string */
 
-$url = $this->getConfig()->get('siteUrl');
-
-//$userConnected = 
 
 $url = $this->getConfig('siteUrl');
-if(isset($userRequest) && isset($proposals)) :
 ?>
 
 <h2>
@@ -33,15 +30,13 @@ if(isset($userRequest) && isset($proposals)) :
     <?php echo $userRequest->getAuthor()->getLogin(); ?> 
     (<?php echo $userRequest->getDate()->format("Y-m-d"); ?>)
 </h4>
+
 <p><?php echo $userRequest->getContent(); ?></p>
 
-<?php echo $proposals;
-endif; 
-?>
+<?php 
+echo $proposals;
 
-
-
-<?php echo $comments; 
+echo $comments; 
 
 if(isset($_SESSION['connectedUser'])) : ?>
 

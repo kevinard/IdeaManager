@@ -4,7 +4,7 @@
 
 <ol>
 <?php 
-$baseUrl = $this->getConfig()->get('siteUrl').'voteComment/';
+$baseUrl = $this->getConfig()->get('siteUrl').'comment/vote/';
 
 foreach($comments as $comment) : ?>  
     

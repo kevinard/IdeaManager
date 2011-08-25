@@ -15,5 +15,10 @@ class Read extends \framework\core\Controller
             $this->set('proposals', $proposals);
             $this->set('comments', $comments);
         }
+        else
+        {
+            $this->setMessage('Error : no request selected');
+            $this->getComponent('httpResponse')->redirect($this->getConfig('siteUrl'), 302, false);
+        }
     }
 }

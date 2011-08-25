@@ -59,8 +59,8 @@ class Comment extends \framework\core\FrameworkObject
     protected $user = null;
 
     /**
-     * @var \application\modules\userRequest\models\UserRequest The UserRequest the comment is related to
-     * @ManyToOne(targetEntity="\application\modules\userRequest\models\UserRequest", inversedBy="comments")
+     * @var \application\modules\userrequest\models\UserRequest The UserRequest the comment is related to
+     * @ManyToOne(targetEntity="\application\modules\userrequest\models\UserRequest", inversedBy="comments")
      */
     protected $userRequest = null;
 
@@ -122,7 +122,7 @@ class Comment extends \framework\core\FrameworkObject
 
     /**
      * Get the userRequest the comment is related to.
-     * @return \application\modules\userRequest\models\UserRequest
+     * @return \application\modules\userrequest\models\UserRequest
      */
     public function getUserRequest()
     {
@@ -171,7 +171,7 @@ class Comment extends \framework\core\FrameworkObject
 
     /**
      * Set the UserRequest the content is related to
-     * @param \application\modules\userRequest\models\UserRequest $userRequest the new UserRequest
+     * @param \application\modules\userrequest\models\UserRequest $userRequest the new UserRequest
      * @return \application\modules\comment\models\Comment the current comment
      */
     public function setUserRequest(\application\modules\userrequest\models\UserRequest $userRequest)
