@@ -47,12 +47,6 @@ class Comment extends \framework\core\FrameworkObject
     protected $content = '';
     
     /**
-     * @var int The comment's score
-     * @Column(type="integer")
-     */
-    protected $score = 0;
-    
-    /**
      * @var \application\modules\user\models\User The comment's owner
      * @ManyToOne(targetEntity="\application\modules\user\models\User", inversedBy="comments")
      */
@@ -103,7 +97,7 @@ class Comment extends \framework\core\FrameworkObject
     }
 
     /**
-     * Get the comment's score
+     * Get the comment's score (i.e. count its votes)
      * @return int 
      */
     public function getScore()
@@ -149,17 +143,6 @@ class Comment extends \framework\core\FrameworkObject
     {
         $this->content = strip_tags($content, '<a><p><span><ul><ol><li><em><i><strong><u><b><strike><div><blockquote>');
         //$this->content = $content;
-        return $this;
-    }
-
-    /**
-     * Set the comment's score
-     * @param int $score  the new score
-     * @return \application\modules\comment\models\Comment the current comment
-     */
-    public function setScore($score)
-    {
-        $this->score = $score;
         return $this;
     }
 
