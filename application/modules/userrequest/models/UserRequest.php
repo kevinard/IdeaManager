@@ -37,6 +37,12 @@ class UserRequest extends \framework\core\FrameworkObject
      * @ManyToOne(targetEntity="\application\modules\category\models\Category")
      */
     protected $category;
+
+
+    /**
+     * @OneToMany(targetEntity="\application\modules\proposal\models\Proposal", mappedBy="userRequest", cascade={"all"}) }
+     */
+    protected $proposals;
     
     /**
      * @Column(type="integer")

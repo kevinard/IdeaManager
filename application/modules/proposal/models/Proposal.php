@@ -30,9 +30,10 @@ class Proposal extends \framework\core\FrameworkObject
     protected $content = '';
     
     /**
-     * @var \application\modules\userrequest\models\UserRequest The UserRequest the proposal is related to
-	 * @ManyToOne(targetEntity="\application\modules\userrequest\models\UserRequest", inversedBy="proposals", cascade={"remove"})
-	 */
+    * The UserRequest the proposal is related to 
+    * @var \application\modules\userrequest\models\UserRequest 
+    * @ManyToOne(targetEntity="\application\modules\userrequest\models\UserRequest", inversedBy="proposals" )
+    */
     protected $userRequest = null;
     
     
