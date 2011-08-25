@@ -28,6 +28,7 @@
 /* @var $vote       \application\modules\vote\models\Vote */
 /* @var $comment    \application\modules\comment\models\Comment */
 /* @var $user       \application\modules\user\models\User */
+/* @var $url        string */
 
 namespace application\modules\comment\controllers;
 
@@ -41,6 +42,7 @@ class vote extends \application\modules\user\securedZoneController
         {
             $em = $this->getComponent('entityManager');
             
+            // check if the user hasn't already voted for that comment
             $vote = $em->getRepository('\application\modules\commentvote\models\CommentVote')
                 ->findBy(array('user' => $_SESSION['connectedUser']->getId(), 'comment' => $commentId));
             
@@ -64,7 +66,6 @@ class vote extends \application\modules\user\securedZoneController
             }
             else
             {
-                
                 $this->setMessage('You already voted for this comment');    
             }
             
