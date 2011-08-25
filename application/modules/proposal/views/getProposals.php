@@ -19,7 +19,9 @@ if(\count($proposals)) : ?>
     <?php foreach($proposals as $proposal) : ?> 
     
     <li>
-        <a href="<?php echo $baseUrl.'proposal/read/'.$proposal->getId(); ?>"><?php echo $proposal->getContent(); ?></a>
+        <!-- a href="<?php echo $baseUrl.'proposal/read/'.$proposal->getId(); ?>" -->
+        <?php echo $proposal->getContent(); ?>
+        <!-- /a -->
         <div>
             <?php if(isset($_SESSION['connectedUser'])): ?>
                 <?php if($viewerIsOwner) : ?>

@@ -23,6 +23,12 @@ if(isset($userRequest) && isset($proposals)) :
     echo $userRequest->getCategory()->getName();  ?> >
     <?php echo $userRequest->getTitle(); ?>
 </h2>
+
+<?php if(isset($_SESSION['connectedUser']) 
+    && $userRequest->getAuthor()->getId() === $_SESSION['connectedUser']->getId()) : ?>
+<a href="<?php echo $url.'userrequest/update/'.$userRequest->getId(); ?>">Edit this request</a>
+<?php endif; ?>
+
 <h4>
     <?php echo $userRequest->getAuthor()->getLogin(); ?> 
     (<?php echo $userRequest->getDate()->format("Y-m-d"); ?>)
@@ -44,11 +50,5 @@ if(isset($_SESSION['connectedUser'])) : ?>
     <textarea name="commentContent" id="commentContent" cols="40" rows="5"></textarea>
     <p><input type="submit" value="Leave a comment" name="formSubmit" /></p>
 </form>
-
-<?php endif; 
-
-if(isset($_SESSION['connectedUser']) && $userRequest->getAuthor()->getId() === $_SESSION['connectedUser']->getId()) : ?>
-
-<a href="<?php echo $url.'userrequest/update/'.$userRequest->getId(); ?>">Edit</a>
 
 <?php endif; ?>

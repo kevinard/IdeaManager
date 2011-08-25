@@ -13,7 +13,11 @@ foreach($comments as $comment) : ?>
             <?php echo $comment->getUser()->getLogin(); ?> said :
             <?php echo $comment->getContent(); ?>
         </p>
-        <p>Score: <?php echo $comment->getScore(); ?> <a href="<?php echo $baseUrl.$comment->getId(); ?>">+1</a></p>
+        <p>Score: <?php echo $comment->getScore(); ?> 
+            <?php if(isset($_SESSION['connectedUser'])) : ?>    
+            <a href="<?php echo $baseUrl.$comment->getId(); ?>">+1</a>
+            <?php endif; ?>
+        </p>
     </li>
     
 <?php endforeach; ?>
