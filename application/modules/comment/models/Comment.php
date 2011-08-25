@@ -64,7 +64,7 @@ class Comment extends \framework\core\FrameworkObject
      */
     //protected $date;
 
-        /**
+    /**
      * Default constructor
      */
     public function __construct()

@@ -23,13 +23,17 @@ if(\count($proposals)) : ?>
         <?php echo $proposal->getContent(); ?>
         <!-- /a -->
         <div>
-            <?php if(isset($_SESSION['connectedUser'])): ?>
-                <?php if($viewerIsOwner) : ?>
-                <a href="<?php echo $baseUrl.'proposal/delete/'.$proposal->getId(); ?>">Remove</a>
+            <p>
+                Score : <?php echo $proposal->getScore(); ?> 
+                <?php if(isset($_SESSION['connectedUser'])): ?>
+                    
+                    <?php if($viewerIsOwner) : ?>
+                    | <a href="<?php echo $baseUrl.'proposal/delete/'.$proposal->getId(); ?>">Remove</a>
+                    <?php endif; ?>
+                    | <a href="<?php echo $baseUrl.'proposal/vote/'.$proposal->getId(); ?>">Up-vote!</a>
+
                 <?php endif; ?>
-                <a href="<?php echo $baseUrl.'proposalvote/update/'.$proposal->getId().'/'.$_SESSION['connectedUser']->getId(); ?>">Up-vote!</a>
-        
-            <?php endif; ?>
+            </p>
         </div>
     </li>
     

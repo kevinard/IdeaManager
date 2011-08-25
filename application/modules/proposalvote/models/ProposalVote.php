@@ -71,7 +71,7 @@ class ProposalVote extends \application\modules\vote\models\Vote
     public function setProposal(\application\modules\proposal\models\Proposal $proposal)
     {
         $this->proposal = $proposal;
-        return this;
+        return $this;
     }
 
 

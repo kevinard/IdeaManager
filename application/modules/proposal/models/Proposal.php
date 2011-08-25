@@ -83,6 +83,20 @@ class Proposal extends \framework\core\FrameworkObject
         return $this->userRequest;
     }
 
+    /**
+     * Get the proposal's score (i.e. count its votes)
+     * @return int The score
+     */
+    public function getScore()
+    {
+        $em = $this->getComponent('entityManager');
+        
+        $votes = $em->getRepository('\application\modules\proposalvote\models\ProposalVote')
+            ->findBy(array('proposal' => $this->id));
+        
+        return count($votes);
+    }
+    
 
     /**
      * SETTERS
