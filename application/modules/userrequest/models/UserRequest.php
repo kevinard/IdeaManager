@@ -57,6 +57,7 @@ class UserRequest extends \framework\core\FrameworkObject
     public function __construct ()
     {
         $this->state = self::STATE_NEW;
+        $this->date = new \DateTime('now');
     }
 
     /****************/

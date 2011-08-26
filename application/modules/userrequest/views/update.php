@@ -1,8 +1,14 @@
+<?php
+
+/* @var $userRequest \application\modules\userrequest\models\UserRequest */
+
+?>
+
 <form action="" method="post">
 
     <p>
         <label for="userRequestTitle">Title: </label>
-        <input id="userRequestTitle" name="userRequestTitle" type="text" />
+        <input id="userRequestTitle" name="userRequestTitle" type="text" value="<?php echo $userRequest->getTitle(); ?>"/>
     </p>
     
     <p>
@@ -10,41 +16,40 @@
         <select name="userRequestCategory" id="userRequestCategory">
             <?php foreach($categories as $category): 
 				if ($category->getParentId() !== null): ?>
-            <option value="<?php echo $category->getId(); ?>"><?php echo $category->getName(); ?></option>
+            <option <?php echo ($category->getId() === $userRequest->getCategory()->getId()) ? 'selected="selected"' : '';?>
+                value="<?php echo $category->getId(); ?>"><?php echo $category->getName(); ?></option>
             <?php endif; 
-			endforeach; ?>
+			endforeach; ?> 
         </select>
     </p>
     
-    <?php if($newRequest) : ?> 
     <p>
-        
-        <input type="hidden" name="userRequestState" value="<?php echo \application\modules\userrequest\models\UserRequest::STATE_NEW; ?>" />
-        
-        <?php else : ?> 
-        
         <label for="userRequestState">State: </label>
         <select name="userRequestState" id="userRequestState">
-            <option value="<?php echo \application\modules\userrequest\models\UserRequest::STATE_NEW; ?>">New</option>
-
-            <option value="<?php echo \application\modules\userrequest\models\UserRequest::STATE_ACCEPTED; ?>">Accepted</option>
-            <option value="<?php echo \application\modules\userrequest\models\UserRequest::STATE_LATER; ?>">Later</option>
-            <option value="<?php echo \application\modules\userrequest\models\UserRequest::STATE_REFUSED; ?>">Refused</option>
+            <option <?php echo ($userRequest->getState() === \application\modules\userrequest\models\UserRequest::STATE_NEW) ? 'selected="selected"' : '' ;?>
+                value="<?php echo \application\modules\userrequest\models\UserRequest::STATE_NEW; ?>">New</option>
+            <option <?php echo ($userRequest->getState() === \application\modules\userrequest\models\UserRequest::STATE_ACCEPTED) ? 'selected="selected"' : '' ;?>
+                value="<?php echo \application\modules\userrequest\models\UserRequest::STATE_ACCEPTED; ?>">Accepted</option>
+            <option <?php echo ($userRequest->getState() === \application\modules\userrequest\models\UserRequest::STATE_LATER) ? 'selected="selected"' : '' ;?>
+                value="<?php echo \application\modules\userrequest\models\UserRequest::STATE_LATER; ?>">Later</option>
+            <option <?php echo ($userRequest->getState() === \application\modules\userrequest\models\UserRequest::STATE_REFUSED) ? 'selected="selected"' : '' ;?>
+                value="<?php echo \application\modules\userrequest\models\UserRequest::STATE_REFUSED; ?>">Refused</option>
 
         </select>
-        
     </p>
-    <?php endif; ?> 
     
     <p>Content: </p>
-    <textarea name="userRequestContent" id="userRequestContent" cols="30" rows="10">
-    <?php ?>
-    </textarea>
+    <textarea name="userRequestContent" id="userRequestContent" cols="30" rows="10"><?php echo $userRequest->getContent(); ?></textarea>
     
     
     <p>Proposals: </p>
     <div id="proposals">
-        <p><input type="text" name="userRequestProposals[]" /></p>
+    
+        <?php foreach($proposals as $proposal) : ?>
+        
+        <p><input type="text" name="userRequestProposals[]" value="<?php echo $proposal->getContent(); ?>"/></p>
+    
+        <?php endforeach; ?>
     </div>
         
     <p>
@@ -52,7 +57,7 @@
     </p>
 
     <p>
-        <input type="submit" name="formSubmit" value="<?php echo ($newRequest) ? 'Create' : 'Update'?>" />
+        <input type="submit" name="formSubmit" value="Update" />
     </p>
 </form>
 
@@ -71,5 +76,6 @@
         container.appendChild(p);
         
         document.getElementById("proposals").appendChild(container);
+        input.focus();
     }
 </script>

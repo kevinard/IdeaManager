@@ -12,12 +12,10 @@
 /* @var $url string */
 
 
-$url = $this->getConfig('siteUrl');
-?>
+$url = $this->getConfig('siteUrl'); ?>
 
 <h2>
-    <?php 
-    echo $userRequest->getCategory()->getName();  ?> >
+    <?php echo $userRequest->getCategory()->getName();  ?> >
     <?php echo $userRequest->getTitle(); ?>
 </h2>
 
@@ -31,15 +29,24 @@ $url = $this->getConfig('siteUrl');
     (<?php echo $userRequest->getDate()->format("Y-m-d"); ?>)
 </h4>
 
-<p><?php echo $userRequest->getContent(); ?></p>
+<div>
+    <?php echo $userRequest->getContent(); ?>
+</div>
 
-<?php 
-echo $proposals;
 
-echo $comments; 
+<h4>PROPOSALS: </h4>
+<div>
+    <?php echo $proposals; ?>
+</div>
 
-if(isset($_SESSION['connectedUser'])) : ?>
 
+<h4>COMMENTS: </h4>
+<div>
+    <?php echo $comments; ?>
+</div>
+
+
+<?php if(isset($_SESSION['connectedUser'])) : ?>
 
 <form action="<?php echo $url.'comment/create/'.$userRequest->getId();?>" method="post">
     <textarea name="commentContent" id="commentContent" cols="40" rows="5"></textarea>

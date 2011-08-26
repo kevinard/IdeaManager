@@ -42,7 +42,7 @@ abstract class Vote extends \framework\core\FrameworkObject
     protected $id;
     
     /**
-     * @ManyToOne(targetEntity="\application\modules\user\models\User")
+     * @ManyToOne(targetEntity="\application\modules\user\models\User", cascade={"remove"})
      * @var \application\modules\user\models\User The owner of the comment 
      */
     protected $user = null;

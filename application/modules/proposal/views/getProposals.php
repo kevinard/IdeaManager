@@ -8,8 +8,6 @@
 /* @var $proposal \application\modules\proposal\models\Proposal */
 ?>
 
-
-<h4>PROPOSALS: </h4>
 <?php
 
 $baseUrl = $this->getConfig()->get('siteUrl');
