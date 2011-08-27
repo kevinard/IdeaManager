@@ -22,6 +22,8 @@ class Init extends \framework\core\Controller
 			
 		$tool->dropDatabase();
 		$tool->createSchema($classes);
+        
+        $this->createRequest('database', 'fill')->execute();
 	}
 }
 
