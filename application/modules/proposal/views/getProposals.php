@@ -40,8 +40,4 @@ if(\count($proposals)) : ?>
     
 <?php else : ?>
 <p>None</p>
-<?php endif;
-
-if($viewerIsOwner) :?>
-    <a href="<?php echo $baseUrl.'userrequest/update/'.$userRequestId; ?>">Add a new proposal</a>
 <?php endif; ?>

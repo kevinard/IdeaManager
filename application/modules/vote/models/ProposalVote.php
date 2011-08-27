@@ -35,7 +35,7 @@ class ProposalVote extends \application\modules\vote\models\Vote
 {
 
     /**
-     * @ManyToOne(targetEntity="\application\modules\proposal\models\Proposal", cascade={"all"})
+     * @ManyToOne(targetEntity="\application\modules\proposal\models\Proposal")
      * @var \application\modules\proposal\models\proposal The proposal the vote is related to.
      */
     protected $proposal = null;

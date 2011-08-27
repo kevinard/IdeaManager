@@ -23,7 +23,7 @@
     <p>Proposals: </p>
     
     <div id="proposals">
-        <p><input type="text" name="userRequestProposals[]" /></p>
+        <p><input type="text" name="newProposals[]" /></p>
     </div>
         
     <p>
@@ -45,12 +45,12 @@
         var input = d.createElement("input");
         
         input.type = "text";
-        input.name = "userRequestProposals[]";
+        input.name = "newProposals[]";
         
         p.appendChild(input);
         container.appendChild(p);
         
-        document.getElementById("proposals").appendChild(container);
+        d.getElementById("proposals").appendChild(container);
         input.focus();
     }
 </script>

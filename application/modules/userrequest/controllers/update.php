@@ -51,30 +51,87 @@ class Update extends \application\modules\user\securedZoneController
                 $userRequest->setAuthor($em->getRepository('\application\modules\user\models\User')->find($_SESSION['connectedUser']->getId()));
                 $userRequest->setCategory($em->getRepository('\application\modules\category\models\Category')->find($_POST['userRequestCategory']));
                 $userRequest->setState($_POST['userRequestState']);
-
                 
-                // get and remove the old proposals
-                $oldProposals = $em->getRepository('\application\modules\proposal\models\Proposal')
-                    ->findBy(array('userRequest' => $userRequestId));
-                
-                foreach($oldProposals as $proposal)
-                {
-                    $em->remove($proposal);
-                }
-                
-                // set the new proposals
-                $newProposals = array();
-                foreach($_POST['userRequestProposals'] as $content)
-                {
-                    $newProposals[] = new \application\modules\proposal\models\Proposal($content, $userRequest);
-                }
-
-                // persist the objects in the database
+                // persist the modified UserRequest in the database
                 $em->persist($userRequest);
-
-                foreach($newProposals as $proposal)
+                
+                
+                /**
+                 * dans les proposals qui existaient déjà et qui ont été conservées : $_POST['oldProposals']
+                 *      - changer le contenu si nécessaire
+                 * dans les nouvelles proposals : $_POST['newProposals']
+                 *      - ajouter à la base de données
+                 * dans les proposals à supprimer : $_POST['obsoleteProposals']
+                 *      - supprimer de la base de données
+                 *      - supprimer les votes liés
+                 */
+                
+                // deal with the old proposals
+                if(isset($_POST['oldProposals']))
                 {
-                    $em->persist($proposal);
+                    // get the old proposals we want to keep
+                    $oldProposals = array();
+                    foreach($_POST['oldProposals'] as $id => $content)
+                    {
+                        $prop = $em->getRepository('\application\modules\proposal\models\Proposal')->find($id);
+                        $prop->setContent($content);
+                        $oldProposals[] = $prop;
+                    }
+                    
+                    // persist the old proposals
+                    foreach($oldProposals as $old)
+                    {
+                        $em->persist($old);
+                    }
+                }
+                
+                // deal with the new proposals
+                if(isset($_POST['newProposals']))
+                {
+                    // get the new proposals we want to add
+                    $newProposals = array();
+                    foreach($_POST['newProposals'] as $content)
+                    {
+                        $newProposals[] = new \application\modules\proposal\models\Proposal($content, $userRequest);
+                    }
+                    
+                    // persist the new proposals
+                    foreach($newProposals as $new)
+                    {
+                        $em->persist($new);
+                    }
+                }
+                
+                
+                // deal with the obsolete proposals
+                if(isset($_POST['obsoleteProposals']))
+                {
+                    // get the obsolete proposals we want to remove, and their related votes
+                    $obsoleteProposals = array();
+                    $obsoleteVotes = array();
+                    foreach($_POST['obsoleteProposals'] as $id)
+                    {
+                        $obsoleteProposals[] = $em->getRepository('\application\modules\proposal\models\Proposal')->find($id);
+                        
+                        $relatedVotes = $em->getRepository('\application\modules\vote\models\ProposalVote')->findBy(array('proposal' => $id));
+                        foreach($relatedVotes as $vote)
+                        {
+                            $obsoleteVotes[] = $vote;
+                        }
+                    }
+                    
+                    // remove the old votes
+                    foreach($obsoleteVotes as $obsolete)
+                    {
+                        $em->remove($obsolete);
+                    }
+                    
+                    // remove the obsolete proposals
+                    foreach($obsoleteProposals as $obsolete)
+                    {
+                        $em->remove($obsolete);
+                    }
+
                 }
 
                 $em->flush();

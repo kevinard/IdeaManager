@@ -47,7 +47,10 @@
     
         <?php foreach($proposals as $proposal) : ?>
         
-        <p><input type="text" name="userRequestProposals[]" value="<?php echo $proposal->getContent(); ?>"/></p>
+        <p>
+            <input type="text" name="oldProposals[<?php echo $proposal->getId(); ?>]" value="<?php echo $proposal->getContent(); ?>"/>
+            <input type="button" value="Delete" onclick="deleteProposal(this.parentNode, <?php echo $proposal->getId(); ?>)" />
+        </p>
     
         <?php endforeach; ?>
     </div>
@@ -70,12 +73,26 @@
         var input = d.createElement("input");
         
         input.type = "text";
-        input.name = "userRequestProposals[]";
+        input.name = "newProposals[]";
         
         p.appendChild(input);
         container.appendChild(p);
         
-        document.getElementById("proposals").appendChild(container);
+        d.getElementById("proposals").appendChild(container);
         input.focus();
+    }
+    
+    function deleteProposal(elem, proposalId)
+    {
+        var d = document;
+        var input = d.createElement("input");
+        var container = d.getElementById("proposals");
+        
+        input.type = "hidden";
+        input.name = "obsoleteProposals[]";
+        input.value = proposalId;
+        
+        container.appendChild(input);
+        container.removeChild(elem);
     }
 </script>

@@ -78,23 +78,34 @@ class checkIntegrity extends \framework\core\Controller
     
     private function checkProposals()
     {
-        if (isset($_POST['userRequestProposals']) && \is_array($_POST['userRequestProposals']) 
-            && count($_POST['userRequestProposals']) > 0)
+        $errors = array();
+        
+        // if there is nor new proposals nor old proposals conserved
+        if(!isset($_POST['newProposals']) && !isset($_POST['oldProposals']))
+        {
+            $errors = array('userRequestProposals' => 'You must specify at least one proposal');
+        }
+        
+        // if there are new proposals
+        if (isset($_POST['newProposals']) && \is_array($_POST['newProposals']) 
+            && \count($_POST['newProposals']) > 0)
 		{
-			foreach($_POST['userRequestProposals'] as $key => $value)
+            // get rid of the empty ones
+			foreach($_POST['newProposals'] as $key => $value)
             {
                 if($value === '')
                 {
-                    unset($_POST['userRequestProposals'][$key]);
+                    unset($_POST['newProposals'][$key]);
                 }
             }
             
-            if(count($_POST['userRequestProposals']) > 0)
-                return array();
+            // then check if there is at least one proposal left
+            if(\count($_POST['newProposals']) > 0)
+                $errors = array();
+            else
+                $errors = array('userRequestProposals' => 'You must specify at least one proposal');
 		}
-        
-        return array('userRequestProposals' => 'You must specify at least one proposal'); 
-        
+        return $errors;
     }
     
     

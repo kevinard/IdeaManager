@@ -23,7 +23,7 @@ class UserRequest extends \framework\core\FrameworkObject
     protected $content;
     
     /**
-     * @ManyToOne(targetEntity="\application\modules\user\models\User")
+     * @ManyToOne(targetEntity="\application\modules\user\models\User", cascade={"all"})
      */
     protected $author;
     
@@ -40,7 +40,7 @@ class UserRequest extends \framework\core\FrameworkObject
 
 
     /**
-     * @OneToMany(targetEntity="\application\modules\proposal\models\Proposal", mappedBy="userRequest", cascade={"all"}) }
+     * @OneToMany(targetEntity="\application\modules\proposal\models\Proposal", mappedBy="userRequest")
      */
     protected $proposals;
     

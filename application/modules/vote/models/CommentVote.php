@@ -35,7 +35,7 @@ class CommentVote extends \application\modules\vote\models\Vote
 {
 
     /**
-     * @ManyToOne(targetEntity="\application\modules\comment\models\Comment", cascade={"all"})
+     * @ManyToOne(targetEntity="\application\modules\comment\models\Comment")
      * @var \application\modules\comment\models\Comment The comment the vote is related to. 
      */
     protected $comment = null;

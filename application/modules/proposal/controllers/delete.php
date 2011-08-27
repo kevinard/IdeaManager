@@ -29,7 +29,7 @@ namespace application\modules\proposal\controllers;
 class delete extends \application\modules\user\securedZoneController
 {
 
-    //public $usesView = false;
+    public $usesView = false;
     
     public function processAction($proposalId = null)
     {

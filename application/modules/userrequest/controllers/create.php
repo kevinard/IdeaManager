@@ -37,7 +37,7 @@ class Create extends \application\modules\user\securedZoneController
 
                 // set the proposals
                 $proposals = array();
-                foreach($_POST['userRequestProposals'] as $content)
+                foreach($_POST['newProposals'] as $content)
                 {
                     $proposals[] = new \application\modules\proposal\models\Proposal($content, $userRequest);
                 }
