@@ -16,8 +16,8 @@ class Init extends \framework\core\Controller
 			$em->getClassMetadata('application\modules\proposal\models\Proposal'),
 			$em->getClassMetadata('application\modules\userrequest\models\UserRequest'),
 			$em->getClassMetadata('application\modules\category\models\Category'),
-			$em->getClassMetadata('application\modules\proposalvote\models\ProposalVote'),
-			$em->getClassMetadata('application\modules\commentvote\models\CommentVote')
+			$em->getClassMetadata('application\modules\vote\models\ProposalVote'),
+			$em->getClassMetadata('application\modules\vote\models\CommentVote')
 			);
 			
 		$tool->dropDatabase();

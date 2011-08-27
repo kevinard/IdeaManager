@@ -92,7 +92,7 @@ class Proposal extends \framework\core\FrameworkObject
     {
         $em = $this->getComponent('entityManager');
         
-        $votes = $em->getRepository('\application\modules\proposalvote\models\ProposalVote')
+        $votes = $em->getRepository('\application\modules\vote\models\ProposalVote')
             ->findBy(array('proposal' => $this->id));
         
         return count($votes);

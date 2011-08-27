@@ -43,7 +43,7 @@ class vote extends \application\modules\user\securedZoneController
             $em = $this->getComponent('entityManager');
             
             // check if the user hasn't already voted for that comment
-            $vote = $em->getRepository('\application\modules\commentvote\models\CommentVote')
+            $vote = $em->getRepository('\application\modules\vote\models\CommentVote')
                 ->findBy(array('user' => $_SESSION['connectedUser']->getId(), 'comment' => $commentId));
             
             $comment = $em->getRepository('\application\modules\comment\models\Comment')
@@ -53,7 +53,7 @@ class vote extends \application\modules\user\securedZoneController
             
             if(count($vote) === 0)
             {
-                $vote = new \application\modules\commentvote\models\CommentVote();
+                $vote = new \application\modules\vote\models\CommentVote();
                 
                 $user = $em->getRepository('\application\modules\user\models\User')
                     ->find($_SESSION['connectedUser']->getId());

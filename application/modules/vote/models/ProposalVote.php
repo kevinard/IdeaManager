@@ -20,59 +20,61 @@
 
 
 /**
- * Description of CommentVote
+ * Description of ProposalVote
  *
  * @author mickael
  */
 
-namespace application\modules\commentvote\models;
+namespace application\modules\vote\models;
 
 /**
  * @Entity
- * @Table(name="commentvotes")
+ * @Table(name="proposalvotes")
  */
-class CommentVote extends \application\modules\vote\models\Vote
+class ProposalVote extends \application\modules\vote\models\Vote
 {
 
     /**
-     * @ManyToOne(targetEntity="\application\modules\comment\models\Comment", cascade={"all"})
-     * @var \application\modules\comment\models\Comment The comment the vote is related to. 
+     * @ManyToOne(targetEntity="\application\modules\proposal\models\Proposal", cascade={"all"})
+     * @var \application\modules\proposal\models\proposal The proposal the vote is related to.
      */
-    protected $comment = null;
+    protected $proposal = null;
     
     public function __construct()
     {
         // empty
     }
-    
+
     /**
      * GETTERS
      */
-
-    /**
-     * Get the comment the vote is related to.
-     * @return \application\modules\comment\models\Comment 
-     */
-    public function getComment()
-    {
-        return $this->comment;
-    }
-
     
+    /**
+     * Get the proposal the vote is related to.
+     * @return \application\modules\proposal\models\Proposal 
+     */
+    public function getProposal()
+    {
+        return $this->proposal;
+    }
+    
+
     /**
      * SETTERS
      */
     
     /**
-     * Set the comment the vote is related to.
-     * @param \application\modules\comment\models\Comment $comment The new comment
-     * @return \application\modules\commentvote\models\CommentVote the current vot
+     * Set the proposal the vote is related to.
+     * @param \application\modules\proposal\models\Proposal $proposal The new Proposal
+     * @return \application\modules\vote\models\ProposalVote the current vote
      */
-    public function setComment(\application\modules\comment\models\Comment $comment)
+    public function setProposal(\application\modules\proposal\models\Proposal $proposal)
     {
-        $this->comment = $comment;
+        $this->proposal = $proposal;
         return $this;
     }
+
+
 
 
 }

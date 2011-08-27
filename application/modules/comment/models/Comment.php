@@ -103,7 +103,7 @@ class Comment extends \framework\core\FrameworkObject
     public function getScore()
     {
         $em = $this->getComponent('entityManager');
-        $votes = $em->getRepository('\application\modules\commentvote\models\CommentVote')
+        $votes = $em->getRepository('\application\modules\vote\models\CommentVote')
             ->findBy(array('comment' => $this->id));
         
         return count($votes);

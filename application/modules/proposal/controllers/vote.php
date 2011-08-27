@@ -26,7 +26,7 @@
  */
 
 /* @var $proposal   \application\modules\proposal\models\Proposal */
-/* @var $vote       \application\modules\proposalvote\models\ProposalVote */
+/* @var $vote       \application\modules\vote\models\ProposalVote */
 /* @var $url        string */
 
 namespace application\modules\proposal\controllers;
@@ -42,7 +42,7 @@ class vote extends \application\modules\user\securedZoneController
             $em = $this->getComponent('entityManager');
             
             // check if the user hasn't already voted for that proposal
-            $vote = $em->getRepository('\application\modules\proposalvote\models\ProposalVote')
+            $vote = $em->getRepository('\application\modules\vote\models\ProposalVote')
                 ->findBy(array('user' => $_SESSION['connectedUser']->getId(), 'proposal' => $proposalId));
             
             $proposal = $em->getRepository('\application\modules\proposal\models\Proposal')
@@ -52,7 +52,7 @@ class vote extends \application\modules\user\securedZoneController
             
             if(count($vote) === 0)
             {
-                $vote = new \application\modules\proposalvote\models\ProposalVote();
+                $vote = new \application\modules\vote\models\ProposalVote();
                 
                 $user = $em->getRepository('\application\modules\user\models\User')
                     ->find($_SESSION['connectedUser']->getId());
