@@ -64,35 +64,4 @@
     </p>
 </form>
 
-<script type="text/javascript">
-    function addNewProposal()
-    {
-        var d = document;
-        var container = d.createDocumentFragment();
-        var p = d.createElement("p");
-        var input = d.createElement("input");
-        
-        input.type = "text";
-        input.name = "newProposals[]";
-        
-        p.appendChild(input);
-        container.appendChild(p);
-        
-        d.getElementById("proposals").appendChild(container);
-        input.focus();
-    }
-    
-    function deleteProposal(elem, proposalId)
-    {
-        var d = document;
-        var input = d.createElement("input");
-        var container = d.getElementById("proposals");
-        
-        input.type = "hidden";
-        input.name = "obsoleteProposals[]";
-        input.value = proposalId;
-        
-        container.appendChild(input);
-        container.removeChild(elem);
-    }
-</script>
+<script type="text/javascript" src="<?php echo $this->getConfig('siteUrl')?>resources/js/script.js"></script>

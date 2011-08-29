@@ -36,21 +36,4 @@
     </p>
 </form>
 
-<script type="text/javascript">
-    function addNewProposal()
-    {
-        var d = document;
-        var container = d.createDocumentFragment();
-        var p = d.createElement("p");
-        var input = d.createElement("input");
-        
-        input.type = "text";
-        input.name = "newProposals[]";
-        
-        p.appendChild(input);
-        container.appendChild(p);
-        
-        d.getElementById("proposals").appendChild(container);
-        input.focus();
-    }
-</script>
+<script type="text/javascript" src="<?php echo $this->getConfig('siteUrl')?>resources/js/script.js"></script>
