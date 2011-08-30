@@ -12,36 +12,67 @@
 /* @var $url string */
 
 
-$url = $this->getConfig('siteUrl'); ?>
+$url = $this->getConfig('siteUrl'); 
 
-<h2>
+switch($userRequest->getState())
+{
+    case \application\modules\userrequest\models\UserRequest::STATE_REFUSED :
+        $state = 'refused';
+        break;
+    case \application\modules\userrequest\models\UserRequest::STATE_ACCEPTED :
+        $state = 'accepted';
+        break;
+    case \application\modules\userrequest\models\UserRequest::STATE_LATER :
+        $state = 'postponed';
+        break;
+    case \application\modules\userrequest\models\UserRequest::STATE_NEW :
+    default :
+        $state = 'new';
+        break;
+}
+?>
+
+<h2 id="userRequestTitle">
     <?php echo $userRequest->getCategory()->getName();  ?> >
     <?php echo $userRequest->getTitle(); ?>
 </h2>
-
-<?php if(isset($_SESSION['connectedUser']) 
-    && $userRequest->getAuthor()->getId() === $_SESSION['connectedUser']->getId()) : ?>
-<a href="<?php echo $url.'userrequest/update/'.$userRequest->getId(); ?>">Edit this request</a>
-<?php endif; ?>
-
 <h4>
     <?php echo $userRequest->getAuthor()->getLogin(); ?> 
     (<?php echo $userRequest->getDate()->format("Y-m-d"); ?>)
 </h4>
 
-<div>
+<p id="userRequestState" class="state_<?php echo $state; ?>">This request is <?php echo $state; ?></p>
+
+<?php if(isset($_SESSION['connectedUser']) 
+    && $userRequest->getAuthor()->getId() === $_SESSION['connectedUser']->getId()) : ?>
+
+<div id="ownerQuickActions">
+    <a href="<?php echo $url.'userrequest/accept/'.$userRequest->getId(); ?>">Accept</a>
+    |
+    <a href="<?php echo $url.'userrequest/refuse/'.$userRequest->getId(); ?>">Refuse</a>
+    |
+    <a href="<?php echo $url.'userrequest/postpone/'.$userRequest->getId(); ?>">Postpone</a>
+    |
+    <a href="<?php echo $url.'userrequest/update/'.$userRequest->getId(); ?>">Edit</a>
+    |
+    <a href="<?php echo $url.'userrequest/delete/'.$userRequest->getId(); ?>">Delete</a>
+</div>
+
+<?php endif; ?>
+
+<div id="userRequestContent">
     <?php echo $userRequest->getContent(); ?>
 </div>
 
 
 <h4>PROPOSALS: </h4>
-<div>
+<div id="userRequestProposals">
     <?php echo $proposals; ?>
 </div>
 
 
 <h4>COMMENTS: </h4>
-<div>
+<div id="userRequestComments">
     <?php echo $comments; ?>
 </div>
 

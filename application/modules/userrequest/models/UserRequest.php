@@ -23,7 +23,7 @@ class UserRequest extends \framework\core\FrameworkObject
     protected $content;
     
     /**
-     * @ManyToOne(targetEntity="\application\modules\user\models\User", cascade={"all"})
+     * @ManyToOne(targetEntity="\application\modules\user\models\User")
      */
     protected $author;
     
@@ -49,9 +49,9 @@ class UserRequest extends \framework\core\FrameworkObject
      */
     protected $state;
 
+    const STATE_REFUSED = -1;
     const STATE_NEW = 0;
     const STATE_ACCEPTED = 1;
-    const STATE_REFUSED = -1;
     const STATE_LATER = 2;
     
     public function __construct ()
@@ -93,7 +93,8 @@ class UserRequest extends \framework\core\FrameworkObject
 
     public function setContent ($content)
     {
-        $this->content = strval($content);
+        $this->content = \strip_tags($content, 
+            '<p><h1><h2><h3><h4><h5><h6><a><blockquote><hr><ul><ol><li><b><u><i><em><strong><img>');
         return $this;
     }
 

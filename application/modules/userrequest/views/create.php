@@ -36,4 +36,17 @@
     </p>
 </form>
 
+<script type="text/javascript" src="<?php echo $this->getConfig('siteUrl')?>resources/js/jquery.min.js"></script>
 <script type="text/javascript" src="<?php echo $this->getConfig('siteUrl')?>resources/js/script.js"></script>
+<script type="text/javascript" src="<?php echo $this->getConfig('siteUrl')?>resources/js/jquery.cleditor.js"></script>
+<script type="text/javascript">
+$('#userRequestContent').cleditor({
+    
+    controls:     // controls to add to the toolbar
+        "bold italic underline strikethrough | size " +
+        "style | color removeformat | bullets numbering | outdent " +
+        "indent | undo redo " +
+        "alignleft center alignright justify rule link unlink | cut copy paste pastetext"
+    
+});
+</script>

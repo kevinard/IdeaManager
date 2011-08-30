@@ -17,9 +17,7 @@ if(\count($proposals)) : ?>
     <?php foreach($proposals as $proposal) : ?> 
     
     <li>
-        <!-- a href="<?php echo $baseUrl.'proposal/read/'.$proposal->getId(); ?>" -->
-        <?php echo $proposal->getContent(); ?>
-        <!-- /a -->
+        <p><?php echo $proposal->getContent(); ?></p>
         <div>
             <p>
                 Score : <?php echo $proposal->getScore(); ?> 

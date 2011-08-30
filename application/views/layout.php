@@ -5,6 +5,7 @@
 		<meta http-equiv="Content-type" content="text/html; charset=utf-8" />
 		<title><?php if (isset($title)) { echo $title; } else { echo $this->getConfig('defaultTitle'); } ?></title>
         <link rel="stylesheet" type="text/css" href="<?php echo $this->getConfig('siteUrl')?>resources/css/screen.css"/>
+        <link rel="stylesheet" type="text/css" href="<?php echo $this->getConfig('siteUrl')?>resources/css/jquery.cleditor.css"/>
     </head>
 	<body>
         <div id="header">

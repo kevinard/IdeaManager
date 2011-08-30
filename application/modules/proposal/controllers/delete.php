@@ -38,10 +38,22 @@ class delete extends \application\modules\user\securedZoneController
             $em = $this->getComponent('entityManager');
             $proposal = $em->getRepository('application\modules\proposal\models\Proposal')->find($proposalId);
             
+            // if the proposal exists
             if($proposal !== null)
             {
+                // get its votes
+                $votes = $em->getRepository('\application\modules\vote\models\ProposalVote')
+                    ->findBy(array('proposal' => $proposalId));
+                
+                // delete its votes
+                foreach ($votes as $vote)
+                {
+                    $em->remove($vote);
+                }
+                
+                // delete the proposal
                 $em->remove($proposal);
-                $em->flush();
+                
                 $this->setMessage('Delete action successful');
             }
             else
@@ -49,8 +61,13 @@ class delete extends \application\modules\user\securedZoneController
                 $this->setMessage('No proposal was found');
             }
             
+            // redirect
             $url = $this->getConfig('siteUrl').'userrequest/read/'.$proposal->getUserRequest()->getId();
             $this->getComponent('httpResponse')->redirect($url, 302, false);
+        }
+        else
+        {
+            $this->getComponent('httpResponse')->redirect($this->getConfig('siteUrl'), 302, false);
         }
     }
 
